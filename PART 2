@@ -1,0 +1,30 @@
+from collections import Counter
+
+def calculate_similarity_score(left_list, right_list):
+    """
+    Calculate the similarity score based on the appearance of numbers
+    in the right list multiplied by their value in the left list.
+    """
+    # Count occurrences in the right list
+    right_count = Counter(right_list)
+
+    # Calculate similarity score
+    similarity_score = 0
+    for num in left_list:
+        similarity_score += num * right_count.get(num, 0)
+
+    return similarity_score
+
+
+# Read input data
+with open("adventofCode2024/input.txt", "r") as f:
+    lines = [list(map(int, line.strip().split())) for line in f]
+
+# Split left and right lists
+left_list, right_list = zip(*lines)
+
+# Calculate similarity score
+similarity_score = calculate_similarity_score(left_list, right_list)
+
+# Output result
+print(f"Similarity Score: {similarity_score}")
